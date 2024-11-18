@@ -1,7 +1,9 @@
 const gridContainer = document.querySelector("#grid-container");
 const gridButton = document.getElementById("btnCreate");
 gridButton.addEventListener("click", createGrid);
-///
+
+
+
 // function createGrid() {
 //     gridContainer.innerHTML = '';
 //     const gridSize = parseInt(document.getElementById('input').value);
