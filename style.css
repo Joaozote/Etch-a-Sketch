@@ -10,6 +10,15 @@ body{
     flex-wrap: wrap;
 }
 
+#color-picker {
+    border-radius: 100%;  
+    border: none;  
+    width: 40px;  
+    height: 40px;  
+    cursor: pointer;  
+}
+
+
 #container{
     display: flex;
     flex-wrap: wrap;
@@ -35,6 +44,8 @@ body{
     gap: 10px;
     align-self: center;
     margin: 10px;
+    align-items: center;
+    font-family: 'Arial', sans-serif;
 }
 
 

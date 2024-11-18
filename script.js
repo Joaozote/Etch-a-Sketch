@@ -36,17 +36,35 @@ function getRandomColor() {
     return `rgb(${r}, ${g}, ${b})`;
 }
 
+function resetGrid() {
+    // Seleciona todas as células da grid e apaga a cor
+    const gridCells = document.querySelectorAll('.grid-cell');
+    gridCells.forEach(cell => {
+        cell.style.backgroundColor = '';  // Reseta a cor de fundo para branco
+        cell.style.transform = 'scale(1)';
+    });
+}
+
+let hoverColor = 'black';
+let isRainbowMode = false;
+
 
 function addHoverEffect() {
     // Selecione todas as células (com a classe grid-cell)
     const gridCells = document.querySelectorAll('.grid-cell');
 
     gridCells.forEach(cell => {
-        // Evento para quando o mouse entra na célula
         cell.addEventListener('mouseenter', function () {
-            this.style.backgroundColor = getRandomColor();  // Altera a cor de fundo
-            this.style.transform = 'scale(1.1)';  // Aumenta o tamanho da célula
-            this.style.transition = 'transform 0.2s ease';  // Animação de aumento
+            if (isRainbowMode) {
+                this.style.backgroundColor = getRandomColor();  // Cor aleatória se o modo rainbow estiver ativado
+            } else {
+                this.style.backgroundColor = hoverColor;  // Cor normal escolhida pelo usuário
+            }
+            this.style.transform = 'scale(1.2)';
+            this.style.transition = 'transform 0.2s ease';
+        });
+        cell.addEventListener('mouseleave', function () {
+            this.style.transform = 'scale(1)';  // Reseta o tamanho para 1 (sem aumento)
         });
 
         // Evento para quando o mouse sai da célula
@@ -58,3 +76,15 @@ function addHoverEffect() {
     });
 }
 
+document.getElementById('color-picker').addEventListener('input', function (event) {
+    hoverColor = event.target.value;  // Atualiza a cor do hover
+});
+
+document.getElementById('btnRandomHover').addEventListener('click', function () {
+    isRainbowMode = !isRainbowMode; // Alterna o estado do modo rainbow
+    this.textContent = isRainbowMode ? "Disable Rainbow" : "Rainbow"; // Troca o texto do botão
+});
+
+document.getElementById('btnErase').addEventListener('click', function () {
+    resetGrid(); // Limpa o grid
+});
