@@ -53,27 +53,63 @@ function addHoverEffect() {
     // Selecione todas as células (com a classe grid-cell)
     const gridCells = document.querySelectorAll('.grid-cell');
 
+    let isDrawing = false;  // Flag para controlar se está desenhando
+
     gridCells.forEach(cell => {
-        cell.addEventListener('mouseenter', function () {
+        let hasColor = false; // Flag para saber se a célula já foi colorida no modo rainbow
+
+        // Começar a desenhar no 'mousedown'
+        cell.addEventListener('mousedown', function () {
+            isDrawing = true;
             if (isRainbowMode) {
-                this.style.backgroundColor = getRandomColor();  // Cor aleatória se o modo rainbow estiver ativado
+                if (!hasColor) {  // Aplica a cor aleatória apenas se ainda não tiver sido colorida
+                    this.style.backgroundColor = getRandomColor();  // Cor aleatória se o modo rainbow estiver ativado
+                    hasColor = true;  // Marca que a célula foi colorida
+                }
             } else {
                 this.style.backgroundColor = hoverColor;  // Cor normal escolhida pelo usuário
             }
             this.style.transform = 'scale(1.2)';
             this.style.transition = 'transform 0.2s ease';
         });
-        cell.addEventListener('mouseleave', function () {
-            this.style.transform = 'scale(1)';  // Reseta o tamanho para 1 (sem aumento)
+
+        // Continuar desenhando enquanto o mouse estiver pressionado (mousemove)
+        cell.addEventListener('mousemove', function () {
+            if (isDrawing) {
+                if (isRainbowMode) {
+                    if (!hasColor) {  // Aplica a cor aleatória apenas se ainda não tiver sido colorida
+                        this.style.backgroundColor = getRandomColor();  // Cor aleatória se o modo rainbow estiver ativado
+                        hasColor = true;  // Marca que a célula foi colorida
+                    }
+                } else {
+                    this.style.backgroundColor = hoverColor;  // Cor normal escolhida pelo usuário
+                }
+                this.style.transform = 'scale(1.2)';
+                this.style.transition = 'transform 0.2s ease';
+            }
         });
 
-        // Evento para quando o mouse sai da célula
-        // cell.addEventListener('mouseleave', function () {
-        //     this.style.backgroundColor = '';  // Reseta a cor de fundo
-        //     this.style.transform = 'scale(1)';  // Reseta o tamanho
-        //     this.style.transition = 'transform 0.2s ease';  // Animação de reset
-        // });
+        // Parar o desenho quando o mouse for solto (mouseup)
+        cell.addEventListener('mouseup', function () {
+            isDrawing = false;
+        });
+
+        // Parar o desenho se o mouse sair da célula (mouseleave)
+        cell.addEventListener('mouseleave', function () {
+            this.style.transform = 'scale(1)';  // Reseta o tamanho para 1 (sem aumento)
+            hasColor = false;  // Reseta o estado de cor da célula quando o mouse sai dela
+        });
     });
+
+    // Garantir que, se o mouse sair do grid ou da tela, o desenho pare
+    document.addEventListener('mouseup', function () {
+        isDrawing = false;  // Para o desenho quando o mouse for solto, mesmo fora do grid
+    });
+
+    document.addEventListener('mouseleave', function () {
+        isDrawing = false;  // Para o desenho se o mouse sair da tela
+    });
+
 }
 
 document.getElementById('color-picker').addEventListener('input', function (event) {
