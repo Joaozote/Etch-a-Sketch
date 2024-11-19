@@ -2,6 +2,19 @@ const gridContainer = document.querySelector("#grid-container");
 const gridButton = document.getElementById("btnCreate");
 gridButton.addEventListener("click", createGrid);
 
+
+// carrega a página com um valor padrão
+window.addEventListener('load', function() {
+    const input = document.getElementById('input');
+
+    // Definir o valor padrão para o input se ele estiver vazio
+    if (!input.value) {
+        input.value = 12;  // Defina o valor padrão para o tamanho da grade (ex: 12)
+    }
+
+    createGrid();  // Chama a função para criar o grid com o valor do input
+});
+
 function createGrid() {
     gridContainer.innerHTML = '';
     const gridSize = parseInt(document.getElementById('input').value);
@@ -9,6 +22,10 @@ function createGrid() {
         alert("Please choose a number between 1 and 100");
     } else {
         const cellSize = 500 / gridSize;
+
+        gridContainer.style.width = '500px';
+        gridContainer.style.height = '500px';
+
         const column = [];
         for (let i = 0; i < gridSize; i++) {
             const cell = document.createElement('div');

@@ -22,13 +22,11 @@ body{
 #container{
     display: flex;
     flex-wrap: wrap;
-    
-    max-width: 500px;
-    max-height: 500px;
 }
 
 .grid-cell {
     border: 1px solid black;
+    box-sizing: border-box;
 }
 
 #grid-container {
@@ -36,6 +34,7 @@ body{
     overflow: hidden;
     justify-content: center;
     margin-top: 20px;
+    box-shadow: 0 0 10px 6px rgba(0, 0, 0, 0.3);
 }
 
 .options{
