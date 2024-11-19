@@ -1,10 +1,12 @@
 const gridContainer = document.querySelector("#grid-container");
 const gridButton = document.getElementById("btnCreate");
+const sizeValue = document.querySelector(".sizeValue");
+const inputRange = document.getElementById("input");
 gridButton.addEventListener("click", createGrid);
 
 
 // carrega a página com um valor padrão
-window.addEventListener('load', function() {
+window.addEventListener('load', function () {
     const input = document.getElementById('input');
 
     // Definir o valor padrão para o input se ele estiver vazio
@@ -13,6 +15,12 @@ window.addEventListener('load', function() {
     }
 
     createGrid();  // Chama a função para criar o grid com o valor do input
+});
+
+//atualiza o sizeValue sempre que o input range mudar
+inputRange.addEventListener('input', function () {
+    const value = inputRange.value;
+    sizeValue.textContent = `${value} x ${value}`;  // Atualiza a div com o novo valor
 });
 
 function createGrid() {
@@ -53,38 +61,32 @@ function getRandomColor() {
     return `rgb(${r}, ${g}, ${b})`;
 }
 
-function resetGrid() {
-    // Seleciona todas as células da grid e apaga a cor
-    const gridCells = document.querySelectorAll('.grid-cell');
-    gridCells.forEach(cell => {
-        cell.style.backgroundColor = '';  // Reseta a cor de fundo para branco
-        cell.style.transform = 'scale(1)';
-    });
-}
 
 let hoverColor = 'black';
 let isRainbowMode = false;
-
 
 function addHoverEffect() {
     // Selecione todas as células (com a classe grid-cell)
     const gridCells = document.querySelectorAll('.grid-cell');
 
     let isDrawing = false;  // Flag para controlar se está desenhando
+    let hasColor = false;   // Flag para saber se a célula já foi colorida
 
     gridCells.forEach(cell => {
-        let hasColor = false; // Flag para saber se a célula já foi colorida no modo rainbow
-
         // Começar a desenhar no 'mousedown'
-        cell.addEventListener('mousedown', function () {
-            isDrawing = true;
+        cell.addEventListener('mousedown', function (e) {
+            e.preventDefault();
+
+            // Impede a seleção de texto enquanto o botão do mouse estiver pressionado
+            window.getSelection().removeAllRanges();
+            isDrawing = true;  // Inicia o desenho
             if (isRainbowMode) {
                 if (!hasColor) {  // Aplica a cor aleatória apenas se ainda não tiver sido colorida
-                    this.style.backgroundColor = getRandomColor();  // Cor aleatória se o modo rainbow estiver ativado
-                    hasColor = true;  // Marca que a célula foi colorida
+                    this.style.backgroundColor = getRandomColor();
+                    hasColor = true;
                 }
             } else {
-                this.style.backgroundColor = hoverColor;  // Cor normal escolhida pelo usuário
+                this.style.backgroundColor = hoverColor;
             }
             this.style.transform = 'scale(1.2)';
             this.style.transition = 'transform 0.2s ease';
@@ -95,11 +97,11 @@ function addHoverEffect() {
             if (isDrawing) {
                 if (isRainbowMode) {
                     if (!hasColor) {  // Aplica a cor aleatória apenas se ainda não tiver sido colorida
-                        this.style.backgroundColor = getRandomColor();  // Cor aleatória se o modo rainbow estiver ativado
-                        hasColor = true;  // Marca que a célula foi colorida
+                        this.style.backgroundColor = getRandomColor();
+                        hasColor = true;
                     }
                 } else {
-                    this.style.backgroundColor = hoverColor;  // Cor normal escolhida pelo usuário
+                    this.style.backgroundColor = hoverColor;
                 }
                 this.style.transform = 'scale(1.2)';
                 this.style.transition = 'transform 0.2s ease';
@@ -123,11 +125,12 @@ function addHoverEffect() {
         isDrawing = false;  // Para o desenho quando o mouse for solto, mesmo fora do grid
     });
 
+    // Para o desenho se o mouse sair da tela
     document.addEventListener('mouseleave', function () {
         isDrawing = false;  // Para o desenho se o mouse sair da tela
     });
-
 }
+
 
 document.getElementById('color-picker').addEventListener('input', function (event) {
     hoverColor = event.target.value;  // Atualiza a cor do hover
@@ -137,6 +140,18 @@ document.getElementById('btnRandomHover').addEventListener('click', function () 
     isRainbowMode = !isRainbowMode; // Alterna o estado do modo rainbow
     this.textContent = isRainbowMode ? "Disable Rainbow" : "Rainbow"; // Troca o texto do botão
 });
+
+
+function resetGrid() {
+    // Seleciona todas as células da grid e apaga a cor
+    const gridCells = document.querySelectorAll('.grid-cell');
+    gridCells.forEach(cell => {
+        cell.style.backgroundColor = '';  // Reseta a cor de fundo para branco
+        cell.style.transform = 'scale(1)';
+    });
+
+
+}
 
 document.getElementById('btnErase').addEventListener('click', function () {
     resetGrid(); // Limpa o grid

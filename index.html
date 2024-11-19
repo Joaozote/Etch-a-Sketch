@@ -10,10 +10,12 @@
 </head>
 
 <body>
+    <h1 id="title">ETCH-A-SKETCH</h1>
 
     <div class="options">
-        <button id="btnCreate">Create Grid</button>
-        <input type="text" id="input">
+        <button id="btnCreate">Change size</button>
+        <div class="sizeValue">12 x 12</div>
+        <input type="range" id="input" value="12" min="1" max="64">
     </div>
 
     <div id="grid-container"></div>
