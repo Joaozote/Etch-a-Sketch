@@ -76,6 +76,7 @@ button {
     /* Cor de fundo padrão */
     color: white;
     /* Cor do texto */
+    
 }
 
 button:hover {
@@ -83,6 +84,7 @@ button:hover {
     /* Cor mais escura no hover */
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
     /* Sombra mais forte no hover */
+    transform: scale(1.1);
 }
 
 button:active {
@@ -91,14 +93,13 @@ button:active {
 }
 
 #btnRandomHover {
-    background-color: #FF6347;
-    /* Cor personalizada para o botão Rainbow */
+    background: linear-gradient(45deg,yellow, violet, indigo, blue, green,  orange, red);
 }
 
 #btnRandomHover:hover {
-    background-color: #ff2d1b;
-    /* Cor mais forte no hover */
-}
+    background: linear-gradient(45deg,yellow, violet, indigo, blue, green,  orange, red);
+
+  }
 
 #btnErase {
     background-color: #f44336;
