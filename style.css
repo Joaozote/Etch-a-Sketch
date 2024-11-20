@@ -24,6 +24,26 @@ body {
     cursor: pointer;
 }
 
+.options {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-self: center;
+    margin: 10px;
+    align-items: center;
+
+}
+
+.options label {
+    font-family: 'Arial', sans-serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #5090da;
+    text-align: center;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    transition: color 0.3s ease;
+}
+
 
 #container {
     display: flex;
@@ -41,16 +61,6 @@ body {
     justify-content: center;
     margin-top: 20px;
     box-shadow: 0 0 10px 6px rgba(0, 0, 0, 0.3);
-}
-
-.options {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    align-self: center;
-    margin: 10px;
-    align-items: center;
-
 }
 
 .sizeValue {
@@ -76,7 +86,7 @@ button {
     /* Cor de fundo padrão */
     color: white;
     /* Cor do texto */
-    
+
 }
 
 button:hover {
@@ -93,13 +103,13 @@ button:active {
 }
 
 #btnRandomHover {
-    background: linear-gradient(45deg,yellow, violet, indigo, blue, green,  orange, red);
+    background: linear-gradient(45deg, yellow, violet, indigo, blue, green, orange, red);
 }
 
 #btnRandomHover:hover {
-    background: linear-gradient(45deg,yellow, violet, indigo, blue, green,  orange, red);
+    background: linear-gradient(45deg, yellow, violet, indigo, blue, green, orange, red);
 
-  }
+}
 
 #btnErase {
     background-color: #f44336;
@@ -115,7 +125,7 @@ button:active {
     background-color: #2196F3;
     /* Cor personalizada para o botão de Tamanho */
     padding: 5px 15px;
-    
+
 }
 
 #btnCreate:hover {
@@ -125,37 +135,53 @@ button:active {
 
 /* Estilo básico do slider */
 input[type="range"] {
-    -webkit-appearance: none;  /* Remove o estilo nativo no Chrome e Safari */
+    -webkit-appearance: none;
+    /* Remove o estilo nativo no Chrome e Safari */
     appearance: none;
-    width: 50%;  /* Define a largura do slider */
-    height: 8px;  /* Define a altura da barra */
-    background: #ddd;  /* Cor da barra do slider */
-    border-radius: 5px;  /* Arredonda as bordas da barra */
-    outline: none;  /* Remove o contorno ao focar */
-    transition: background 0.3s ease;  /* Transição suave para cor da barra */
+    width: 50%;
+    /* Define a largura do slider */
+    height: 8px;
+    /* Define a altura da barra */
+    background: #ddd;
+    /* Cor da barra do slider */
+    border-radius: 5px;
+    /* Arredonda as bordas da barra */
+    outline: none;
+    /* Remove o contorno ao focar */
+    transition: background 0.3s ease;
+    /* Transição suave para cor da barra */
 }
 
 /* Personaliza o botão (thumb) do slider */
 input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;  /* Remove o estilo nativo no Chrome */
+    -webkit-appearance: none;
+    /* Remove o estilo nativo no Chrome */
     appearance: none;
-    width: 20px;  /* Largura do botão */
-    height: 20px;  /* Altura do botão */
-    background-color: #4CAF50;  /* Cor do botão */
-    border-radius: 50%;  /* Tornar o botão arredondado */
+    width: 20px;
+    /* Largura do botão */
+    height: 20px;
+    /* Altura do botão */
+    background-color: #4CAF50;
+    /* Cor do botão */
+    border-radius: 50%;
+    /* Tornar o botão arredondado */
     border: none;
-    cursor: pointer;  /* Cursor de "mão" ao passar por cima */
-    transition: background-color 0.3s ease;  /* Transição suave para cor */
+    cursor: pointer;
+    /* Cursor de "mão" ao passar por cima */
+    transition: background-color 0.3s ease;
+    /* Transição suave para cor */
 }
 
 /* Personaliza o botão no hover */
 input[type="range"]::-webkit-slider-thumb:hover {
-    background-color: #45a049;  /* Cor do botão no hover */
+    background-color: #45a049;
+    /* Cor do botão no hover */
 }
 
 
 
 /* Estilo da barra do slider quando o usuário interage */
 input[type="range"]:focus {
-    background-color: #ffb84d;  /* Muda a cor da barra ao focar */
+    background-color: #ffb84d;
+    /* Muda a cor da barra ao focar */
 }
